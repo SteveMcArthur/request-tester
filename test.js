@@ -2,6 +2,7 @@
 var app = require('./app');
 var debug = require('debug')('request-tester:server');
 var http = require('http');
+var request = require('request');
 
 /**
  * Normalize a port into a number, string, or false.
@@ -45,21 +46,21 @@ function initialize(callback) {
         }
 
         var bind = typeof port === 'string' ?
-                'Pipe ' + port :
-                'Port ' + port;
+            'Pipe ' + port :
+            'Port ' + port;
 
         // handle specific listen errors with friendly messages
         switch (error.code) {
-        case 'EACCES':
-            console.error(bind + ' requires elevated privileges');
-            process.exit(1);
-            break;
-        case 'EADDRINUSE':
-            console.error(bind + ' is already in use');
-            process.exit(1);
-            break;
-        default:
-            throw error;
+            case 'EACCES':
+                console.error(bind + ' requires elevated privileges');
+                process.exit(1);
+                break;
+            case 'EADDRINUSE':
+                console.error(bind + ' is already in use');
+                process.exit(1);
+                break;
+            default:
+                throw error;
         }
     }
 
@@ -68,7 +69,7 @@ function initialize(callback) {
      */
 
     var server = http.createServer(app);
-   
+
     /**
      * Event listener for HTTP server "listening" event.
      */
@@ -79,7 +80,7 @@ function initialize(callback) {
             'pipe ' + addr :
             'port ' + addr.port;
         console.log('Listening on ' + bind);
-        callback();
+        callback(addr, port);
     }
 
     /**
@@ -94,8 +95,18 @@ function initialize(callback) {
 }
 
 console.log("Running tests...");
-initialize(function(){
+initialize(function (addr, port) {
     console.log("Test running...");
-    process.exit();
+    var url = "http://localhost:" + port;
+    console.log("Call: " + url);
+    request(url, function (err, response, body) {
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        } else {
+            console.log("Request successfull!!");
+            process.exit();
+        }
+    });
 
 });
