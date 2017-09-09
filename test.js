@@ -96,5 +96,6 @@ function initialize(callback) {
 console.log("Running tests...");
 initialize(function(){
     console.log("Test running...");
+    process.exit();
 
 });
