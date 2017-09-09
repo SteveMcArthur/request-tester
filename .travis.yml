@@ -1,7 +1,7 @@
 env: DB=postgres
 language: node_js
 # there is a problem with npm 5.3.0 which will cause the tests to fail
-install: "npm install -g npm@5.2.0"
+install: "npm install -g npm@5.2.0 && npm install"
 script: "npm test"
 node_js:
   - "8.2.1"
