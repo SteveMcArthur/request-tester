@@ -80,7 +80,7 @@ function initialize(callback) {
             'pipe ' + addr :
             'port ' + addr.port;
         console.log('Listening on ' + bind);
-        callback(addr, port);
+        callback(port);
     }
 
     /**
@@ -95,7 +95,7 @@ function initialize(callback) {
 }
 
 console.log("Running tests...");
-initialize(function (addr, port) {
+initialize(function (port) {
     console.log("Test running...");
     var url = "http://localhost:" + port;
     console.log("Call: " + url);

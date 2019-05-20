@@ -1,5 +1,5 @@
 {
-  "name": "request-tester-editor",
+  "name": "request-tester",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -13,7 +13,7 @@
     "ect": "^0.5.9",
     "express": "~4.13.4",
     "jade": "~1.11.0",
-    "morgan": "~1.7.0",
+    "morgan": "^1.9.1",
     "request": "^2.81.0",
     "serve-favicon": "~2.3.0"
   }
